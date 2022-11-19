@@ -5,12 +5,15 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import { Ionicons } from '@expo/vector-icons';
 import Home from "./components/Home";
+import Map from "./components/Map";
+import Settings from "./components/Settings";
 
 const Tab = createBottomTabNavigator();
 
 const routeIcons : any = {
-  "Hem": "send",
-  "Bort": "send"
+  "Hem": "home",
+  "Karta": "map",
+  "Inställningar": "settings"
 };
 
 export default function App() {
@@ -23,12 +26,13 @@ export default function App() {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'blue',
+        tabBarActiveTintColor: 'green',
         tabBarInactiveTintColor: 'gray',
         })}
       >
         <Tab.Screen name="Hem" component={Home} />
-        <Tab.Screen name="Bort" component={Home} />
+        <Tab.Screen name="Karta" component={Map} />
+        <Tab.Screen name="Inställningar" component={Settings} />
       </Tab.Navigator>
       </NavigationContainer>
     <StatusBar style="auto" />

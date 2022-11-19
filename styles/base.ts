@@ -22,3 +22,8 @@ export const warning_text = {
     color: "#ff0000",
     fontSize: 22
 }
+
+export const percentage = {
+      color: "red",
+      fontSize: 40
+}

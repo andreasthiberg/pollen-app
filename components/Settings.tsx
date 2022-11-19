@@ -1,6 +1,5 @@
 import { Text, View, ScrollView } from 'react-native';
 import { Base } from '../styles';
-import { Ionicons } from '@expo/vector-icons';
 
 export default function Home() {
 
@@ -8,11 +7,10 @@ export default function Home() {
     return (
         <ScrollView>
         <View style={Base.base}>
-            <Text style={Base.title}>Dagens pollenhalt nära dig:</Text>
-            <Text style={Base.percentage}>22%</Text>
+            <Text style={Base.title}>Välkommen</Text>
         </View>
         <View style={Base.base}>
-            <Ionicons name={"leaf"} size={200} color={"green"} />
+            <Text style={Base.title}>Välkommen</Text>
         </View>
         </ScrollView>
     );
