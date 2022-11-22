@@ -1,7 +1,7 @@
 import { Text, View, ScrollView } from 'react-native';
 import { Base } from '../styles';
 
-export default function Home() {
+export default function Settings() {
 
 
     return (
