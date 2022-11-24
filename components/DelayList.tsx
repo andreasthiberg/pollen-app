@@ -3,7 +3,6 @@ import { DataTable } from "react-native-paper";
 import { useEffect, useState } from 'react';
 
 export default function DelayList({delays, setDelays}: any) {
-
     
     const table = delays.map((delay: any, index: any) => { 
     let stationName = "N/A";
@@ -15,7 +14,6 @@ export default function DelayList({delays, setDelays}: any) {
           <DataTable.Cell style={{flex: 1}}>{delay.AdvertisedTrainIdent}</DataTable.Cell>
           <DataTable.Cell style={{flex: 1}}>{delay.advertisedTimeShort.slice(5,11)}</DataTable.Cell>
           <DataTable.Cell style={{flex: 1}}><Text style={styles.lateTime}>{delay.estimatedTimeShort.slice(5,11)}</Text></DataTable.Cell>
-          
           <DataTable.Cell style={{flex: 1.5}}>{stationName}</DataTable.Cell>
         </DataTable.Row>
     )

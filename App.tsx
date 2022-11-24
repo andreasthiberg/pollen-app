@@ -25,20 +25,24 @@ const routeIcons : any = {
 export default function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
+
+  //All current delays
   const [delays, setDelays] = useState([]);
+
 
   useEffect(() => {
     reloadDelays();
   },[]);
 
+
   async function reloadDelays(){
-    setDelays(await delaysModel.getDelaysWithStationInfo());
+     setDelays(await delaysModel.getDelaysWithStationInfo());
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <NavigationContainer>
-      <Tab.Navigator screenOptions={({ route }) => ({
+      <Tab.Navigator screenOptions={({ route   }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = routeIcons[route['name']] || "alert";
 
@@ -51,7 +55,9 @@ export default function App() {
         <Tab.Screen name="Förseningar">
           {() => <Delays delays={delays} setDelays={setDelays} />}
         </Tab.Screen>
-        <Tab.Screen name="Karta" component={Map} />
+        <Tab.Screen name="Karta">
+          {() => <Map delays={delays} />}
+        </Tab.Screen>
         {isLoggedIn ?
         <Tab.Screen name="Favoriter" component={Favourites} /> :
         <Tab.Screen name="Logga in">

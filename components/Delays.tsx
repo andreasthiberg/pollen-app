@@ -9,6 +9,7 @@ export default function Delays({delays, setDelays}: any) {
     return (
         <ScrollView>
         <View style={Base.base}>
+            <Text style={{fontSize:20}}>Alla förseningar</Text>
             <DelayList delays={delays} setDelays={setDelays}/>
         </View>
         </ScrollView>
