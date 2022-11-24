@@ -9,10 +9,7 @@ import * as Location from 'expo-location';
 
 export default function Map() {
 
-    const [marker, setMarker] = useState(<Marker
-        coordinate={{ latitude: 0, longitude: 0 }}
-        title={""}
-    />);
+
     const [locationMarker, setLocationMarker] = useState(<Marker
         coordinate={{ latitude: 0, longitude: 0 }}
         title={""}
@@ -54,7 +51,6 @@ export default function Map() {
                         latitudeDelta: 0.1,
                         longitudeDelta: 0.1,
                     }}>
-                    {marker}
                     {locationMarker}
                 </MapView>
                 <Text>{errorMessage}</Text>

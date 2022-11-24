@@ -2,9 +2,7 @@ import { Text, View, ScrollView } from 'react-native';
 import { Base } from '../styles';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function Home() {
-
-
+export default function Favourites() {
     return (
         <ScrollView>
         <View style={Base.base}>
