@@ -16,3 +16,11 @@ test('Favourite page should show delay if it matches favourite stations', async 
     expect(trainId).toBeDefined();
     expect(station).toBeDefined();
 });
+
+test('Favourite page should NOT show delay if it DOES NOT match favourite stations', async () => {
+    const { queryByText } = render(<FavouriteList userFavourites={[{artefact:"Lund C"}]} delays={[exampleDelay]}/>)
+    const trainId = await queryByText('645', { exact: false });
+    const station = await queryByText('Stockholm C', { exact: false });
+    expect(trainId).toBeNull();
+    expect(station).toBeNull();
+});
