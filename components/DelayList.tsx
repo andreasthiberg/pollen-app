@@ -7,7 +7,6 @@ export default function DelayList(props: any) {
 
     let table = props.delays.map((delay: any, index: any) => { 
     let stationName = "N/A";
-    let currentScreen = props.currentScreen;
 
     if(delay.stationInfo != undefined){
         stationName = delay.stationInfo.AdvertisedLocationName;
@@ -44,7 +43,7 @@ export default function DelayList(props: any) {
         <DataTable>
         <DataTable.Header>
                 <DataTable.Title style={{flex: 1}}>Tåg-ID</DataTable.Title>
-                <DataTable.Title style={{flex: 1}}>Avång</DataTable.Title>
+                <DataTable.Title style={{flex: 1}}>Avgång</DataTable.Title>
                 <DataTable.Title style={{flex: 1}}>Ny</DataTable.Title>
                 <DataTable.Title style={{flex: 1.5}}>Ort</DataTable.Title>
          </DataTable.Header>

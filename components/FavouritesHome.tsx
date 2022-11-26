@@ -1,4 +1,4 @@
-import FavouriteList from './Favourites';
+import FavouriteList from './FavouriteList';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SingleDelay from './SingleDelay';
 

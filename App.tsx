@@ -25,7 +25,7 @@ const routeIcons : any = {
 
 export default function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
   const [userFavourites, setUserFavourites] = useState([]);
 
   //All current delays
