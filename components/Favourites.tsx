@@ -1,16 +1,28 @@
 import { Text, View, ScrollView } from 'react-native';
 import { Base } from '../styles';
-import { Ionicons } from '@expo/vector-icons';
+import DelayList from './DelayList';
+import { useState, useEffect } from 'react';
 
-export default function Favourites() {
+export default function FavouriteList(props: any) {
+
+    const [favouriteDelays, setFavouriteDelays] = useState([]);
+
+    let delaysWithStations; 
+    let favouriteStationList : Array<String>;
+
+    useEffect(() => {
+        delaysWithStations = props.delays.filter((delay: any) => delay.hasOwnProperty("stationInfo"));
+        favouriteStationList = props.userFavourites.map((favourite: any) => { return (favourite.artefact)});
+        setFavouriteDelays(delaysWithStations.filter((delay:any) => favouriteStationList.includes(delay.stationInfo.AdvertisedLocationName)));
+      },[props.userFavourites]);
+
+      
     return (
-        <ScrollView>
+        <ScrollView style={Base.pageContainer}>
         <View style={Base.base}>
-            <Text style={Base.title}>Dagens pollenhalt nära dig:</Text>
-            <Text style={Base.percentage}>22%</Text>
-        </View>
-        <View style={Base.base}>
-            <Ionicons name={"leaf"} size={200} color={"green"} />
+            <Text style={Base.title}>Förseningar vid dina stationer</Text>
+            <Text style={{textAlign: "center", marginTop: 5, marginBottom: 5}}>Klicka på en försening för att se promenadkarta.</Text>
+            <DelayList navigation={props.navigation} delays={favouriteDelays} setDelays={props.setDelays} />
         </View>
         </ScrollView>
     );

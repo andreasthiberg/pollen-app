@@ -7,7 +7,7 @@ import * as Location from 'expo-location';
 import MapView, { Marker, Callout } from 'react-native-maps';
 
 
-export default function Map(props: any) {
+export default function DelayMap(props: any) {
 
 
     const [locationMarker, setLocationMarker] = useState(<Marker
@@ -18,16 +18,19 @@ export default function Map(props: any) {
 
     const [errorMessage, setErrorMessage] = useState("");
 
-    let markerList = [];
+    const [markerList, setMarkerList] = useState<Array<typeof Marker>>([]);
 
-    //Create station delay marekers
+
+    useEffect(() => {
+    //Create station delay markers
         
+        let newMarkerList: any = [];
         let delaysWithStationInfo = props.delays.filter((delay:any) => delay.hasOwnProperty("stationInfo"));
         let stationsWithDelays: any = {};
 
         for(let delay of delaysWithStationInfo){
             let station = delay.stationInfo.AdvertisedLocationName;
-            let delayInfo = {"advertisedTime": delay.advertisedTimeShort, "estimatedTime": delay.estimatedTimeShort, "trainId": delay.AdvertisedTrainIdent};
+            let delayInfo = {"advertisedTime": delay.advertisedTimeShort.time, "estimatedTime": delay.estimatedTimeShort.time, "trainId": delay.AdvertisedTrainIdent};
             if(!stationsWithDelays.hasOwnProperty(station)){
                 stationsWithDelays[station] = {"delays": [delayInfo]};
                 stationsWithDelays[station].coordString = delay.stationInfo.Geometry.WGS84;
@@ -56,14 +59,14 @@ export default function Map(props: any) {
                 delayList.push(
                     <DataTable.Row key={delayIndex}>
                     <DataTable.Cell style={{flex:1}}>{delay.trainId}</DataTable.Cell>
-                    <DataTable.Cell style={{flex:1}}>{delay.advertisedTime.slice(5,11)}</DataTable.Cell>
-                    <DataTable.Cell style={{flex:1}}><Text style={{color: "red"}}>{delay.estimatedTime.slice(5,11)}</Text></DataTable.Cell>
+                    <DataTable.Cell style={{flex:1}}>{delay.advertisedTime}</DataTable.Cell>
+                    <DataTable.Cell style={{flex:1}}><Text style={{color: "red"}}>{delay.estimatedTime}</Text></DataTable.Cell>
                     </DataTable.Row>
                 )
                 delayIndex++;
             }
 
-            markerList.push(
+            newMarkerList.push(
                 <Marker
                 key={index}
                 coordinate={{
@@ -85,8 +88,12 @@ export default function Map(props: any) {
                     </DataTable>
                 </Callout>
                 </Marker>)
+
         };
 
+        setMarkerList(newMarkerList);
+
+    },[props.delays]);
 
 
     //Create user location marker
@@ -124,11 +131,12 @@ export default function Map(props: any) {
                         latitudeDelta: 0.1,
                         longitudeDelta: 0.1,
                     }}>
+                    <>
                     {locationMarker}
                     {markerList}
-
+                    </>
                 </MapView>
-                <Text>{errorMessage}</Text>
+                <Text>{errorMessage}</Text> 
             </View>
         </View>
     );

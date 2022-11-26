@@ -1,16 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import FlashMessage from 'react-native-flash-message';
 import { Ionicons } from '@expo/vector-icons';
-import Delays from "./components/Delays";
-import Map from "./components/Map";
-import Favourites from "./components/Favourites";
+import DelayMap from "./components/DelayMap";
+import FavouritesHome from "./components/FavouritesHome";
 import Settings from "./components/Settings";
 import Auth from "./components/auth/Auth";
 import delaysModel from './models/delays';
+import settingsModel from './models/settings';
 import { useState, useEffect } from 'react';
+import HomePage from './components/HomePage';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +25,8 @@ const routeIcons : any = {
 
 export default function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(true);
+  const [userFavourites, setUserFavourites] = useState([]);
 
   //All current delays
   const [delays, setDelays] = useState([]);
@@ -32,8 +34,18 @@ export default function App() {
 
   useEffect(() => {
     reloadDelays();
+    reloadFavourites();
   },[]);
 
+  useEffect(() => {
+    reloadFavourites();
+  },[isLoggedIn]);
+
+  async function reloadFavourites(){
+    let newFavouriteDelays = await settingsModel.getFavourites();
+    console.log(newFavouriteDelays);
+    setUserFavourites(newFavouriteDelays);
+  } 
 
   async function reloadDelays(){
      setDelays(await delaysModel.getDelaysWithStationInfo());
@@ -53,18 +65,24 @@ export default function App() {
         })}
       >
         <Tab.Screen name="Förseningar">
-          {() => <Delays delays={delays} setDelays={setDelays} />}
+          {() => <HomePage delays={delays} setDelays={setDelays} />}
         </Tab.Screen>
         <Tab.Screen name="Karta">
-          {() => <Map delays={delays} />}
+          {() => <DelayMap delays={delays} />}
         </Tab.Screen>
         {isLoggedIn ?
-        <Tab.Screen name="Favoriter" component={Favourites} /> :
+        <Tab.Screen name="Favoriter">
+            {() => <FavouritesHome delays={delays} setDelays={setDelays} userFavourites={userFavourites}/>}
+        </Tab.Screen>
+        :
         <Tab.Screen name="Logga in">
           {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
         </Tab.Screen>
         }
-        <Tab.Screen name="Inställningar" component={Settings} />
+        {isLoggedIn &&
+        <Tab.Screen name="Inställningar">
+        {() => <Settings reloadFavourites={reloadFavourites} userFavourites={userFavourites} delays={delays} />}
+        </Tab.Screen> }
       </Tab.Navigator>
       </NavigationContainer>
     <StatusBar style="auto" />

@@ -29,7 +29,7 @@ const delays = {
     changeTimeFormat: async function changeTimeFormat(timeStamp: string) {
         let day = timeStamp.slice(5,10);
         let time = timeStamp.slice(11,16);
-        return day + " " + time;
+        return {time: time, day: day};
     }
 };
    

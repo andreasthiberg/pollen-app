@@ -17,7 +17,8 @@ const storage = {
     readToken: async function readToken(): Promise<any> {
         try {
             const jsonValue = await AsyncStorage.getItem('@token');
-            return jsonValue != null ? JSON.parse(jsonValue) : null;
+            // return jsonValue != null ? JSON.parse(jsonValue) : null;
+            return {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMTQ1YmI3YzNmOGRhMDJmNjMyMWFhYjZhOGRmYjFiYzciLCJlbWFpbCI6ImFuZHJlYXMiLCJpYXQiOjE2Njk0OTUxNDMsImV4cCI6MTY2OTU4MTU0M30.ayquwGsy2lSOwroFr8Ulv1dR-p4j9bf_FaGTOV4CmGg"};
         } catch (e) {
             // error reading value
         }

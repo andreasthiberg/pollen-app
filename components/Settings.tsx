@@ -1,18 +1,22 @@
-import { Text, View, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Base } from '../styles';
+import FavouriteStations from './FavouriteStations';
+import AddFavourite from './AddFavourite';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function Settings() {
+const Stack = createNativeStackNavigator();
+
+export default function Settings({userFavourites, reloadFavourites, delays}: any) {
 
 
     return (
-        <ScrollView>
-        <View style={Base.base}>
-            <Text style={Base.title}>Välkommen</Text>
-        </View>
-        <View style={Base.base}>
-            <Text style={Base.title}>Välkommen</Text>
-        </View>
-        </ScrollView>
+        <Stack.Navigator initialRouteName="List">
+            <Stack.Screen name="List">
+                {(screenProps) => <FavouriteStations {...screenProps} userFavourites={userFavourites} reloadFavourites={reloadFavourites} />}
+            </Stack.Screen>
+            <Stack.Screen name="Lägg till favorit">
+                {(screenProps) => <AddFavourite {...screenProps} userFavourites={userFavourites} reloadFavourites={reloadFavourites} delays={delays}  />}
+            </Stack.Screen>
+        </Stack.Navigator>
     );
 }
-

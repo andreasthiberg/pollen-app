@@ -24,7 +24,6 @@ const auth = {
             },
         });
         const result = await response.json();
-        console.log(result);
         if("errors" in result){
             return result;
         }

@@ -1,4 +1,8 @@
 
+export const pageContainer = {
+      backgroundColor: '#f2f2fc',
+};
+
 export const base: any =  {
       backgroundColor: '#f2f2fc',
       paddingLeft: 12,
@@ -10,7 +14,8 @@ export const base: any =  {
 
 export const title =  {
       color: '#000',
-      fontSize: 20
+      fontSize: 20,
+      marginBottom: 10
 };
 
 export const subtitle = {
@@ -21,9 +26,4 @@ export const subtitle = {
 export const warning_text = {
     color: "#ff0000",
     fontSize: 22
-}
-
-export const percentage = {
-      color: "red",
-      fontSize: 40
 }
