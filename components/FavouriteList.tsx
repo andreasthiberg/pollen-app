@@ -1,4 +1,4 @@
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, Button } from 'react-native';
 import { Base } from '../styles';
 import DelayList from './DelayList';
 import { useState, useEffect } from 'react';
@@ -22,7 +22,13 @@ export default function FavouriteList(props: any) {
         <View style={Base.base}>
             <Text style={Base.title}>Förseningar vid dina stationer</Text>
             <Text style={{textAlign: "center", marginTop: 5, marginBottom: 5}}>Klicka på en försening för att se promenadkarta.</Text>
-            <DelayList navigation={props.navigation} delays={favouriteDelays} setDelays={props.setDelays} />
+            <Button
+                title="Uppdatera"
+                onPress={() => {
+                    props.reloadDelays();
+                }}  
+            />
+            <DelayList reloadDelays={props.reloadDelays} navigation={props.navigation} delays={favouriteDelays} setDelays={props.setDelays} />
         </View>
         </ScrollView>
     );

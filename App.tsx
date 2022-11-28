@@ -65,14 +65,14 @@ export default function App() {
         })}
       >
         <Tab.Screen name="Förseningar">
-          {() => <HomePage delays={delays} setDelays={setDelays} />}
+          {() => <HomePage reloadDelays={reloadDelays} delays={delays} setDelays={setDelays} />}
         </Tab.Screen>
         <Tab.Screen name="Karta">
           {() => <DelayMap delays={delays} />}
         </Tab.Screen>
         {isLoggedIn ?
         <Tab.Screen name="Favoriter">
-            {() => <FavouritesHome delays={delays} setDelays={setDelays} userFavourites={userFavourites}/>}
+            {() => <FavouritesHome reloadDelays={reloadDelays} delays={delays} setDelays={setDelays} userFavourites={userFavourites}/>}
         </Tab.Screen>
         :
         <Tab.Screen name="Logga in">

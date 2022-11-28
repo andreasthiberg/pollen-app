@@ -26,7 +26,7 @@ export default function SingleDelay(props:any) {
     let dateB = new Date(delay.EstimatedTimeAtLocation);
     let timeDifferenceInSeconds = (dateB.getTime() - dateA.getTime()) / 1000;
 
-    let possibleDistance = ((timeDifferenceInSeconds-600)/60) * 100;
+    let possibleDistance = ((timeDifferenceInSeconds-600)/60) * 50;
     if(possibleDistance < 0 ){
         possibleDistance = 0;
     }
